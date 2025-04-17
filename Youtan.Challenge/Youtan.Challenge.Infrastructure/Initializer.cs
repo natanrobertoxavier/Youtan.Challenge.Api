@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using Youtan.Challenge.Domain.Repositories.Contracts;
+using Youtan.Challenge.Domain.Repositories.Contracts.Client;
 using Youtan.Challenge.Infrastructure.Extensions;
 using Youtan.Challenge.Infrastructure.Repositories;
 
@@ -57,6 +58,8 @@ public static class Initializer
     {
         services
             .AddScoped<IUserWriteOnly, UserRepository>()
-            .AddScoped<IUserReadOnly, UserRepository>();
+            .AddScoped<IUserReadOnly, UserRepository>()
+            .AddScoped<IClientWriteOnly, ClientRepository>()
+            .AddScoped<IClientReadOnly, ClientRepository>();
     }
 }
