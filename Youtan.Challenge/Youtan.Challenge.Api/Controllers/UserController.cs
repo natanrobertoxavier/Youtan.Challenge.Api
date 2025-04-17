@@ -21,7 +21,7 @@ public class UserController : YoutanController
         return ResponseCreate(result);
     }
 
-    [HttpPost("user/login")]
+    [HttpPost("login")]
     [ProducesResponseType(typeof(Result<ResponseLogin>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(Result<ResponseLogin>), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(Result<ResponseLogin>), StatusCodes.Status422UnprocessableEntity)]

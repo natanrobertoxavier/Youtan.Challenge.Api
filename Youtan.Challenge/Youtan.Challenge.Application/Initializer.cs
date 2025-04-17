@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using TokenService.Manager.Controller;
 using Youtan.Challenge.Application.Services;
+using Youtan.Challenge.Application.UseCases.Client.Login;
 using Youtan.Challenge.Application.UseCases.Client.Register;
 using Youtan.Challenge.Application.UseCases.User.Login;
 using Youtan.Challenge.Application.UseCases.User.Register;
@@ -31,9 +32,8 @@ public static class Initializer
         services
             .AddScoped<IRegisterUserUseCase, RegisterUserUseCase>()
             .AddScoped<IUserLoginUseCase, UserLoginUseCase>()
-            .AddScoped<IRegisterClientUseCase, RegisterClientUseCase>();
-        //.AddScoped<IRecoverAllUseCase, RecoverAllUseCase>()
-        //.AddScoped<IRecoverByEmailUseCase, RecoverByEmailUseCase>()
+            .AddScoped<IRegisterClientUseCase, RegisterClientUseCase>()
+            .AddScoped<IClientLoginUseCase, ClientLoginUseCase>();
     }
 
     private static void AddAdditionalKeyPassword(IServiceCollection services, IConfiguration configuration)
