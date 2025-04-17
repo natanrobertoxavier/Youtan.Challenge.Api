@@ -8,12 +8,12 @@ using Youtan.Challenge.Exceptions.ExceptionBase;
 
 namespace Youtan.Challenge.Application.UseCases.User.Register;
 
-public class RegisterUseCase(
+public class RegisterUserUseCase(
     IUserReadOnly userReadOnlyrepository,
     IUserWriteOnly userWriteOnlyrepository,
     IWorkUnit workUnit,
     PasswordEncryptor passwordEncryptor,
-    ILogger logger) : IRegisterUseCase
+    ILogger logger) : IRegisterUserUseCase
 {
     private readonly IUserReadOnly _userReadOnlyrepository = userReadOnlyrepository;
     private readonly IUserWriteOnly _userWriteOnlyrepository = userWriteOnlyrepository;

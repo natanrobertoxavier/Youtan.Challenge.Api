@@ -13,7 +13,7 @@ public class UserController : YoutanController
     [ProducesResponseType(typeof(Result<MessageResult>), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(Result<MessageResult>), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> RegisterUserAsync(
-        [FromServices] IRegisterUseCase useCase,
+        [FromServices] IRegisterUserUseCase useCase,
         [FromBody] RequestRegisterUser request)
     {
         var result = await useCase.RegisterUserAsync(request);

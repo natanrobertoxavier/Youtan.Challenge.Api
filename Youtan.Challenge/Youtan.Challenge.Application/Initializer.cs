@@ -28,7 +28,7 @@ public static class Initializer
     private static void AddUseCases(IServiceCollection services)
     {
         services
-            .AddScoped<IRegisterUseCase, RegisterUseCase>()
+            .AddScoped<IRegisterUserUseCase, RegisterUserUseCase>()
             .AddScoped<IUserLoginUseCase, UserLoginUseCase>();
         //.AddScoped<IChangePasswordUseCase, ChangePasswordUseCase>()
         //.AddScoped<IRecoverAllUseCase, RecoverAllUseCase>()
