@@ -72,7 +72,7 @@ public class RegisterUseCase(
 
         var thereIsWithEmail = await _userReadOnlyrepository.RecoverByEmailAsync(request.Email);
 
-        if (thereIsWithEmail?.Id != Guid.Empty)
+        if (thereIsWithEmail is not null)
             validationResult.Errors.Add(new FluentValidation.Results.ValidationFailure("email", "E-mail já cadastrado"));
 
         if (!validationResult.IsValid)

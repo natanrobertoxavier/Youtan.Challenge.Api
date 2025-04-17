@@ -1,7 +1,9 @@
 using Youtan.Challenge.Application;
+using Youtan.Challenge.Infrastructure;
 using Youtan.Challenge.Infrastructure.Repositories;
 using Youtan.Challenge.Infrastructure.Extensions;
 using Youtan.Challenge.Infrastructure.Migrations;
+using Youtan.Challenge.Api.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,8 +44,9 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddApplication(builder.Configuration);
-//builder.Services.AddInfrastructure(builder.Configuration);
-//builder.Services.AddScoped<AuthenticatedUserAttribute>();
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddScoped<AuthenticatedUserAttribute>();
+builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilters)));
 
 var app = builder.Build();
 
