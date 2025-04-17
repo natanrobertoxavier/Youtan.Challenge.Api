@@ -11,7 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\Youtan.Challenge.Application\Youtan.Challenge.Application.csproj" />
+    <ProjectReference Include="..\Youtan.Challenge.Communication\Youtan.Challenge.Communication.csproj" />
+    <ProjectReference Include="..\Youtan.Challenge.Exceptions\Youtan.Challenge.Exceptions.csproj" />
+    <ProjectReference Include="..\Youtan.Challenge.Infrastructure\Youtan.Challenge.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
