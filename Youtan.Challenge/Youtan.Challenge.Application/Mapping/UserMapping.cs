@@ -1,4 +1,5 @@
-﻿using Youtan.Challenge.Communication.Request;
+﻿using Youtan.Challenge.Communication.Reponse;
+using Youtan.Challenge.Communication.Request;
 
 namespace Youtan.Challenge.Application.Mapping;
 
@@ -23,12 +24,12 @@ public static class UserMapping
     //    );
     //}
 
-    //public static ResponseLogin ToResponseLogin(this Domain.Entities.User doctor, string token)
-    //{
-    //    return new ResponseLogin(
-    //        doctor.Name,
-    //        doctor.Email,
-    //        token
-    //    );
-    //}
+    public static ResponseLogin ToResponseLogin(this Domain.Entities.User user, string token)
+    {
+        return new ResponseLogin(
+            user.Name,
+            user.Email,
+            token
+        );
+    }
 }

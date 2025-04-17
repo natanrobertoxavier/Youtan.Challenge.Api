@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using Youtan.Challenge.Application.UseCases.User.Login;
 using Youtan.Challenge.Application.UseCases.User.Register;
 using Youtan.Challenge.Communication.Reponse;
 using Youtan.Challenge.Communication.Request;
@@ -19,46 +21,20 @@ public class UserController : YoutanController
         return ResponseCreate(result);
     }
 
-    //[HttpPut("change-password")]
-    //[ServiceFilter(typeof(AuthenticatedUserAttribute))]
-    //[ProducesResponseType(typeof(Result<MessageResult>), StatusCodes.Status200OK)]
-    //[ProducesResponseType(typeof(Result<MessageResult>), StatusCodes.Status404NotFound)]
-    //[ProducesResponseType(typeof(Result<MessageResult>), StatusCodes.Status422UnprocessableEntity)]
-    //public async Task<IActionResult> ChangePasswordAsync(
-    //    [FromServices] IChangePasswordUseCase useCase,
-    //    [FromBody] RequestChangePassword request)
-    //{
-    //    var result = await useCase.ChangePasswordAsync(request);
+    [HttpPost("user/login")]
+    [ProducesResponseType(typeof(Result<ResponseLogin>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(Result<ResponseLogin>), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(Result<ResponseLogin>), StatusCodes.Status422UnprocessableEntity)]
+    public async Task<IActionResult> UserLoginAsync(
+        [FromServices] IUserLoginUseCase useCase,
+        [FromBody] RequestLogin request)
+    {
+        var result = await useCase.LoginAsync(request);
 
-    //    return Response(result);
-    //}
-
-    //[HttpGet]
-    //[ServiceFilter(typeof(AuthenticatedUserAttribute))]
-    //[ProducesResponseType(typeof(Result<MessageResult>), StatusCodes.Status200OK)]
-    //[ProducesResponseType(typeof(Result<MessageResult>), StatusCodes.Status404NotFound)]
-    //[ProducesResponseType(typeof(Result<MessageResult>), StatusCodes.Status422UnprocessableEntity)]
-    //public async Task<IActionResult> RecoverAllAsync(
-    //    [FromServices] IRecoverAllUseCase useCase,
-    //    [FromQuery] int page = 1,
-    //    [FromQuery] int pageSize = 5)
-    //{
-    //    var result = await useCase.RecoverAllAsync(page, pageSize);
-
-    //    return Response(result);
-    //}
-
-    //[HttpGet("{email}")]
-    //[ServiceFilter(typeof(AuthenticatedUserAttribute))]
-    //[ProducesResponseType(typeof(Result<MessageResult>), StatusCodes.Status200OK)]
-    //[ProducesResponseType(typeof(Result<MessageResult>), StatusCodes.Status404NotFound)]
-    //[ProducesResponseType(typeof(Result<MessageResult>), StatusCodes.Status400BadRequest)]
-    //public async Task<IActionResult> RecoverByEmailAsync(
-    //    [FromServices] IRecoverByEmailUseCase useCase,
-    //    [FromRoute] string email)
-    //{
-    //    var result = await useCase.RecoverByEmailAsync(email);
-
-    //    return Response(result);
-    //}
+        return Response(
+            result,
+            HttpStatusCode.OK,
+            HttpStatusCode.Unauthorized,
+            HttpStatusCode.Unauthorized);
+    }
 }
