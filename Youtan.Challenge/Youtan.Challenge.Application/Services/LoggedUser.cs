@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using TokenService.Manager.Controller;
-using Youtan.Challenge.Domain.Repositories.Contracts;
+using Youtan.Challenge.Domain.Repositories.Contracts.User;
 
 namespace Youtan.Challenge.Application.Services;
 

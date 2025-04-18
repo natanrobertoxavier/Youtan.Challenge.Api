@@ -1,35 +1,44 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using FluentMigrator.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using System.ComponentModel.DataAnnotations;
 using TokenService.Manager.Controller;
-using Youtan.Challenge.Communication.Reponse;
 using Youtan.Challenge.Domain.Repositories.Contracts.User;
+using System.ComponentModel.DataAnnotations;
+using Youtan.Challenge.Domain.Repositories.Contracts.Client;
 using Youtan.Challenge.Exceptions.ExceptionBase;
+using Youtan.Challenge.Communication.Reponse;
 
 namespace Youtan.Challenge.Api.Filters;
 
-public class AuthenticatedUserAttribute(
+public class AuthenticatedAttribute(
     TokenController tokenController,
-    IUserReadOnly userReadOnlyrepository) : AuthorizeAttribute, IAsyncAuthorizationFilter
+    IUserReadOnly userReadOnlyRepository,
+    IClientReadOnly clientReadOnlyRepository) : AuthorizeAttribute, IAsyncAuthorizationFilter
 {
     private readonly TokenController _tokenController = tokenController;
-    private readonly IUserReadOnly _userReadOnlyrepository = userReadOnlyrepository;
+    private readonly IUserReadOnly _userReadOnlyrepository = userReadOnlyRepository;
+    private readonly IClientReadOnly _clientReadOnlyRepository = clientReadOnlyRepository;
 
     public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
     {
         try
         {
             var token = TokenInRequest(context);
-            var userEmail = _tokenController.RecoverEmail(token);
+            var email = _tokenController.RecoverEmail(token);
 
-            var user = await _userReadOnlyrepository.RecoverByEmailAsync(userEmail);
+            var user = await _userReadOnlyrepository.RecoverByEmailAsync(email);
 
-            if (user is null)
-            {
-                throw new ValidationException("Usuário não localizado para o token informado");
-            }
+            if (user is not null)
+                return;
+
+            var client = await _clientReadOnlyRepository.RecoverByEmailAsync(email);
+
+            if (client is not null)
+                return;
+
+            throw new ValidationException("Usuário não localizado para o token informado");
         }
         catch (SecurityTokenExpiredException)
         {

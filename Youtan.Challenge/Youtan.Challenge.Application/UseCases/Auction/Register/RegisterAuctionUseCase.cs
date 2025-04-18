@@ -1,48 +1,47 @@
 ﻿using Serilog;
 using TokenService.Manager.Controller;
 using Youtan.Challenge.Application.Mapping;
+using Youtan.Challenge.Application.Services;
 using Youtan.Challenge.Communication.Reponse;
 using Youtan.Challenge.Communication.Request;
 using Youtan.Challenge.Domain.Repositories.Contracts;
-using Youtan.Challenge.Domain.Repositories.Contracts.User;
+using Youtan.Challenge.Domain.Repositories.Contracts.Auction;
 using Youtan.Challenge.Exceptions.ExceptionBase;
 
-namespace Youtan.Challenge.Application.UseCases.User.Register;
+namespace Youtan.Challenge.Application.UseCases.Auction.Register;
 
-public class RegisterUserUseCase(
-    IUserReadOnly userReadOnlyrepository,
-    IUserWriteOnly userWriteOnlyrepository,
+public class RegisterAuctionUseCase(
+    IAuctionWriteOnly auctionWriteOnlyRepository,
+    ILoggedUser loggedUser,
     IWorkUnit workUnit,
-    PasswordEncryptor passwordEncryptor,
-    ILogger logger) : IRegisterUserUseCase
+    ILogger logger) : IRegisterAuctionUseCase
 {
-    private readonly IUserReadOnly _userReadOnlyrepository = userReadOnlyrepository;
-    private readonly IUserWriteOnly _userWriteOnlyrepository = userWriteOnlyrepository;
+    private readonly IAuctionWriteOnly _auctionWriteOnlyRepository = auctionWriteOnlyRepository;
+    private readonly ILoggedUser _loggedUser = loggedUser;
     private readonly IWorkUnit _workUnit = workUnit;
-    private readonly PasswordEncryptor _passwordEncryptor = passwordEncryptor;
     private readonly ILogger _logger = logger;
 
-    public async Task<Result<MessageResult>> RegisterUserAsync(RequestRegisterUser request)
+    public async Task<Result<MessageResult>> RegisterAuctionAsync(RequestRegisterAuction request)
     {
         var output = new Result<MessageResult>();
 
         try
         {
-            _logger.Information($"Início {nameof(RegisterUserAsync)}.");
+            _logger.Information($"Início {nameof(RegisterAuctionAsync)}.");
 
-            await Validate(request);
+            Validate(request);
 
-            var encryptedPassword = _passwordEncryptor.Encrypt(request.Password);
+            var loggedUser = await _loggedUser.GetLoggedUserAsync();
 
-            var user = request.ToEntity(encryptedPassword);
+            var auction = request.ToEntity(loggedUser.Id);
 
-            await _userWriteOnlyrepository.AddAsync(user);
+            await _auctionWriteOnlyRepository.AddAsync(auction);
 
             await _workUnit.CommitAsync();
 
             output.Succeeded(new MessageResult("Cadastro realizado com sucesso"));
 
-            _logger.Information($"Fim {nameof(RegisterUserAsync)}.");
+            _logger.Information($"Fim {nameof(RegisterAuctionAsync)}.");
         }
         catch (ValidationErrorsException ex)
         {
@@ -64,17 +63,12 @@ public class RegisterUserUseCase(
         return output;
     }
 
-    private async Task Validate(RequestRegisterUser request)
+    private void Validate(RequestRegisterAuction request)
     {
         _logger.Information($"Início {nameof(Validate)}.");
 
-        var userValidator = new RegisterValidator();
-        var validationResult = userValidator.Validate(request);
-
-        var thereIsWithEmail = await _userReadOnlyrepository.RecoverByEmailAsync(request.Email);
-
-        if (thereIsWithEmail is not null)
-            validationResult.Errors.Add(new FluentValidation.Results.ValidationFailure("email", "E-mail já cadastrado"));
+        var auctionValidator = new RegisterValidator();
+        var validationResult = auctionValidator.Validate(request);
 
         if (!validationResult.IsValid)
         {
