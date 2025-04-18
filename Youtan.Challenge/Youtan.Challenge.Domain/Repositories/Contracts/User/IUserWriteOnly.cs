@@ -1,4 +1,4 @@
-﻿namespace Youtan.Challenge.Domain.Repositories.Contracts;
+﻿namespace Youtan.Challenge.Domain.Repositories.Contracts.User;
 
 public interface IUserWriteOnly
 {

@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using TokenService.Manager.Controller;
-using Youtan.Challenge.Domain.Repositories.Contracts;
 using System.ComponentModel.DataAnnotations;
 using Youtan.Challenge.Exceptions.ExceptionBase;
 using Youtan.Challenge.Communication.Reponse;
+using Youtan.Challenge.Domain.Repositories.Contracts.User;
 
 namespace Youtan.Challenge.Api.Filters;
 

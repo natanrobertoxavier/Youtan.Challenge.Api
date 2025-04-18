@@ -3,5 +3,6 @@
 public enum NumberVersions
 {
     CreateUsersTable = 1,
-    CreateClientsTable = 2
+    CreateClientsTable = 2,
+    CreateAuctionsTable = 3,
 }

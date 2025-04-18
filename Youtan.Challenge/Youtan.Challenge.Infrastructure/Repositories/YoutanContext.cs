@@ -7,6 +7,7 @@ public class YoutanContext(DbContextOptions<YoutanContext> options) : DbContext(
 {
     public DbSet<User> Users { get; set; }
     public DbSet<Client> Clients { get; set; }
+    public DbSet<Auction> Auctions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

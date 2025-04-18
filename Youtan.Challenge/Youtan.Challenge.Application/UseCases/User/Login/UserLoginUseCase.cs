@@ -3,7 +3,7 @@ using TokenService.Manager.Controller;
 using Youtan.Challenge.Application.Mapping;
 using Youtan.Challenge.Communication.Reponse;
 using Youtan.Challenge.Communication.Request;
-using Youtan.Challenge.Domain.Repositories.Contracts;
+using Youtan.Challenge.Domain.Repositories.Contracts.User;
 using Youtan.Challenge.Exceptions.ExceptionBase;
 
 namespace Youtan.Challenge.Application.UseCases.User.Login;

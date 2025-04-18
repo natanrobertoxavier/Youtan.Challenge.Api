@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Youtan.Challenge.Domain.Entities;
-using Youtan.Challenge.Domain.Repositories.Contracts;
+using Youtan.Challenge.Domain.Repositories.Contracts.User;
 
 namespace Youtan.Challenge.Infrastructure.Repositories;
 
