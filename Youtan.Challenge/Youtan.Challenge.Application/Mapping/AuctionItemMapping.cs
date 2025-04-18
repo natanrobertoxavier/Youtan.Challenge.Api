@@ -7,11 +7,11 @@ namespace Youtan.Challenge.Application.Mapping;
 
 public static class AuctionItemMapping
 {
-    public static AuctionItem ToEntity(this RequestRegisterAuctionItems request, Guid userId)
+    public static AuctionItem ToEntity(this RequestRegisterAuctionItem request, Guid userId)
     {
         return new AuctionItem(
             (Domain.Enum.ItemType)request.ItemType,
-            request.Description,
+            request.Description.ToUpper(),
             userId,
             request.AuctionId,
             request.StartingBid

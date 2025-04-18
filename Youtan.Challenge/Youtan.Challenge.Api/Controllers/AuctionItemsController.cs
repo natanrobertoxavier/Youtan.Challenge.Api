@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Youtan.Challenge.Api.Filters;
-using Youtan.Challenge.Application.UseCases.Auction.Recover.RecoverAll;
 using Youtan.Challenge.Application.UseCases.AuctionItems.Recover.RecoverAll;
 using Youtan.Challenge.Application.UseCases.AuctionItems.Register;
+using Youtan.Challenge.Application.UseCases.AuctionItems.Update;
 using Youtan.Challenge.Communication.Reponse;
 using Youtan.Challenge.Communication.Request;
 
@@ -16,7 +16,7 @@ public class AuctionItemsController : YoutanController
     [ProducesResponseType(typeof(Result<MessageResult>), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> RegisterAuctionItemsAsync(
         [FromServices] IRegisterAuctionItemsUseCase useCase,
-        [FromBody] RequestRegisterAuctionItems request)
+        [FromBody] RequestRegisterAuctionItem request)
     {
         var result = await useCase.RegisterAuctionItemsAsync(request);
 
@@ -34,6 +34,20 @@ public class AuctionItemsController : YoutanController
         [FromQuery] int pageSize = 5)
     {
         var result = await useCase.RecoverAllAsync(page, pageSize);
+
+        return Response(result);
+    }
+
+    [HttpPut]
+    [ServiceFilter(typeof(AuthenticatedUserAttribute))]
+    [ProducesResponseType(typeof(Result<ResponseClient>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(Result<ResponseClient>), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(Result<ResponseClient>), StatusCodes.Status422UnprocessableEntity)]
+    public async Task<IActionResult> UpdateAuctionItemsAsync(
+        [FromServices] IUpdateAuctionItemUseCase useCase,
+        [FromBody] RequestUpdateAuctionItem request)
+    {
+        var result = await useCase.UpdateAuctionItemAsync(request);
 
         return Response(result);
     }

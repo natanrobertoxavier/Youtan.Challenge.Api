@@ -5,5 +5,5 @@ namespace Youtan.Challenge.Application.UseCases.AuctionItems.Register;
 
 public interface IRegisterAuctionItemsUseCase
 {
-    Task<Result<MessageResult>> RegisterAuctionItemsAsync(RequestRegisterAuctionItems request);
+    Task<Result<MessageResult>> RegisterAuctionItemsAsync(RequestRegisterAuctionItem request);
 }

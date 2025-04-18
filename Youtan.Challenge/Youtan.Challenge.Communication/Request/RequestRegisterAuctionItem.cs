@@ -4,7 +4,7 @@ using Youtan.Challenge.Communication.Filters;
 
 namespace Youtan.Challenge.Communication.Request;
 
-public class RequestRegisterAuctionItems(
+public class RequestRegisterAuctionItem(
     ItemType itemType,
     string description,
     decimal startingBid,

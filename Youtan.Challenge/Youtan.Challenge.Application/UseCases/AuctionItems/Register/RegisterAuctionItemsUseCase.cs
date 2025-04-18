@@ -23,7 +23,7 @@ public class RegisterAuctionItemsUseCase(
     private readonly IWorkUnit _workUnit = workUnit;
     private readonly ILogger _logger = logger;
 
-    public async Task<Result<MessageResult>> RegisterAuctionItemsAsync(RequestRegisterAuctionItems request)
+    public async Task<Result<MessageResult>> RegisterAuctionItemsAsync(RequestRegisterAuctionItem request)
     {
         var output = new Result<MessageResult>();
 
@@ -65,7 +65,7 @@ public class RegisterAuctionItemsUseCase(
         return output;
     }
 
-    private async Task Validate(RequestRegisterAuctionItems request)
+    private async Task Validate(RequestRegisterAuctionItem request)
     {
         _logger.Information($"Início {nameof(Validate)}.");
 

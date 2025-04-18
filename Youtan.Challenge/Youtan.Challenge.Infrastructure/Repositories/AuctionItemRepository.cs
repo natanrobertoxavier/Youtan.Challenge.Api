@@ -19,4 +19,8 @@ public class AuctionItemRepository(YoutanContext context) : IAuctionItemWriteOnl
         .Skip(page)
         .Take(pageSize)
         .ToListAsync();
+
+    public async Task<AuctionItem?> RecoverByIdAsync(Guid auctionItemId) =>
+        await _context.AuctionItems
+        .FirstOrDefaultAsync(x => x.Id == auctionItemId);
 }

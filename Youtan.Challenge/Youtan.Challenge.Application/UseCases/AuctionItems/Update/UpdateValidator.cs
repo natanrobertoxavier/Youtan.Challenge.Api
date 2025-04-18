@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
 using Youtan.Challenge.Communication.Request;
 
-namespace Youtan.Challenge.Application.UseCases.AuctionItems.Register;
+namespace Youtan.Challenge.Application.UseCases.AuctionItems.Update;
 
-public class RegisterValidator : AbstractValidator<RequestRegisterAuctionItem>
+public class UpdateValidator : AbstractValidator<RequestUpdateAuctionItem>
 {
-    public RegisterValidator()
+    public UpdateValidator()
     {
         RuleFor(c => c.ItemType)
             .IsInEnum().WithMessage("O tipo do item deve ser válido");
@@ -16,9 +16,5 @@ public class RegisterValidator : AbstractValidator<RequestRegisterAuctionItem>
 
         RuleFor(c => c.StartingBid)
             .GreaterThan(0).WithMessage("O valor inicial do item deve ser maior que zero");
-
-        RuleFor(c => c.AuctionId)
-            .NotEmpty().WithMessage("O ID do leilão não pode estar em branco")
-            .NotEqual(Guid.Empty).WithMessage("O ID do leilão deve ser um GUID válido");
     }
 }

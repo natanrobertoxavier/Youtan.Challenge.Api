@@ -9,9 +9,9 @@ public static class AuctionMapping
         return new Domain.Entities.Auction(
             userId,
             request.AuctionDate,
-            request.AuctionName,
-            request.AuctionDescription,
-            request.AuctionAddress
+            request.AuctionName.ToUpper(),
+            request.AuctionDescription.ToUpper(),
+            request.AuctionAddress.ToUpper()
         );
     }
     public static Communication.Reponse.ResponseAuction ToResponse(this Domain.Entities.Auction entity)

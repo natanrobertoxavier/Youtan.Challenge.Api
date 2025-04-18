@@ -9,6 +9,7 @@ using Youtan.Challenge.Application.UseCases.Auction.Register;
 using Youtan.Challenge.Application.UseCases.Auction.Update;
 using Youtan.Challenge.Application.UseCases.AuctionItems.Recover.RecoverAll;
 using Youtan.Challenge.Application.UseCases.AuctionItems.Register;
+using Youtan.Challenge.Application.UseCases.AuctionItems.Update;
 using Youtan.Challenge.Application.UseCases.Client.Delete;
 using Youtan.Challenge.Application.UseCases.Client.Login;
 using Youtan.Challenge.Application.UseCases.Client.Recover.RecoverAll;
@@ -51,7 +52,8 @@ public static class Initializer
             .AddScoped<IDeleteAuctionUseCase, DeleteAuctionUseCase>()
             .AddScoped<IUpdateAuctionUseCase, UpdateAuctionUseCase>()
             .AddScoped<IRegisterAuctionItemsUseCase, RegisterAuctionItemsUseCase>()
-            .AddScoped<IRecoverAllAuctionItemUseCase, RecoverAllAuctionItemUseCase>();
+            .AddScoped<IRecoverAllAuctionItemUseCase, RecoverAllAuctionItemUseCase>()
+            .AddScoped<IUpdateAuctionItemUseCase, UpdateAuctionItemUseCase>();
     }
 
     private static void AddAdditionalKeyPassword(IServiceCollection services, IConfiguration configuration)

@@ -4,9 +4,6 @@ using Youtan.Challenge.Application.UseCases.Auction.Delete;
 using Youtan.Challenge.Application.UseCases.Auction.Recover.RecoverAll;
 using Youtan.Challenge.Application.UseCases.Auction.Register;
 using Youtan.Challenge.Application.UseCases.Auction.Update;
-using Youtan.Challenge.Application.UseCases.Client.Delete;
-using Youtan.Challenge.Application.UseCases.Client.Recover.RecoverAll;
-using Youtan.Challenge.Application.UseCases.Client.Update;
 using Youtan.Challenge.Communication.Reponse;
 using Youtan.Challenge.Communication.Request;
 
