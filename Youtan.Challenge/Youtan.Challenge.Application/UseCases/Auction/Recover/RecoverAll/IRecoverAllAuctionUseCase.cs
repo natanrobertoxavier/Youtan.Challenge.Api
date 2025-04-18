@@ -2,7 +2,7 @@
 
 namespace Youtan.Challenge.Application.UseCases.Auction.Recover.RecoverAll;
 
-public interface IRecoverAllAuctionsUseCase
+public interface IRecoverAllAuctionUseCase
 {
     Task<Result<IEnumerable<ResponseAuction>>> RecoverAllAsync(int page, int pageSize);
 }

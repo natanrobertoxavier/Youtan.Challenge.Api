@@ -5,9 +5,9 @@ using Youtan.Challenge.Domain.Repositories.Contracts.Auction;
 
 namespace Youtan.Challenge.Application.UseCases.Auction.Recover.RecoverAll;
 
-public class RecoverAllAuctionsUseCase(
+public class RecoverAllAuctionUseCase(
     IAuctionReadOnly auctionReadOnlyRepository,
-    ILogger logger) : IRecoverAllAuctionsUseCase
+    ILogger logger) : IRecoverAllAuctionUseCase
 {
     private readonly IAuctionReadOnly _auctionReadOnlyRepository = auctionReadOnlyRepository;
     private readonly ILogger _logger = logger;

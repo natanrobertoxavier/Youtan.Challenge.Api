@@ -33,7 +33,7 @@ public class AuctionController : YoutanController
     [ProducesResponseType(typeof(Result<IEnumerable<ResponseAuction>>), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(Result<IEnumerable<ResponseAuction>>), StatusCodes.Status422UnprocessableEntity)]
     public async Task<IActionResult> RecoverAllAsync(
-        [FromServices] IRecoverAllAuctionsUseCase useCase,
+        [FromServices] IRecoverAllAuctionUseCase useCase,
         [FromQuery] int page = 1,
         [FromQuery] int pageSize = 5)
     {
@@ -41,7 +41,6 @@ public class AuctionController : YoutanController
 
         return Response(result);
     }
-
 
     [HttpPut]
     [ServiceFilter(typeof(AuthenticatedUserAttribute))]

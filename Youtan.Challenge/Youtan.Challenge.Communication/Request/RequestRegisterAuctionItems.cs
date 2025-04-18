@@ -7,10 +7,12 @@ namespace Youtan.Challenge.Communication.Request;
 public class RequestRegisterAuctionItems(
     ItemType itemType,
     string description,
+    decimal startingBid,
     Guid auctionId)
 {
     [JsonConverter(typeof(ItemsTypeConverter))]
     public ItemType ItemType { get; set; } = itemType;
     public string Description { get; set; } = description;
+    public decimal StartingBid { get; set; } = startingBid;
     public Guid AuctionId { get; set; } = auctionId;
 }

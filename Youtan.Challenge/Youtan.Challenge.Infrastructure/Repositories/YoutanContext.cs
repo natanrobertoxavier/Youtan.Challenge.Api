@@ -14,4 +14,9 @@ public class YoutanContext(DbContextOptions<YoutanContext> options) : DbContext(
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(YoutanContext).Assembly);
     }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseLazyLoadingProxies();
+    }
 }

@@ -11,24 +11,28 @@ public class AuctionItem : BaseEntity
         ItemType itemType,
         string description, 
         Guid userId, 
-        Guid auctionId) : base(auctionItemid, registrationDate)
+        Guid auctionId,
+        decimal startingBid) : base(auctionItemid, registrationDate)
     {
         ItemType = itemType;
         Description = description;
         UserId = userId;
         AuctionId = auctionId;
+        StartingBid = startingBid;
     }
 
     public AuctionItem(
         ItemType itemType,
         string description, 
         Guid userId, 
-        Guid auctionId)
+        Guid auctionId,
+        decimal startBid)
     {
         ItemType = itemType;
         Description = description;
         UserId = userId;
         AuctionId = auctionId;
+        StartingBid = startBid;
     }
 
     public AuctionItem()
@@ -37,6 +41,7 @@ public class AuctionItem : BaseEntity
 
     public ItemType ItemType { get; set; }
     public string Description { get; set; }
+    public decimal StartingBid { get; set; }
     public Guid UserId { get; set; }
     public Guid AuctionId { get; set; }
     public virtual Auction Auction { get; set; }
