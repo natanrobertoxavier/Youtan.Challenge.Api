@@ -14,6 +14,21 @@ public class AuctionItemRepository(YoutanContext context) : IAuctionItemWriteOnl
     public void Update(AuctionItem acutionItem) =>
         _context.AuctionItems.Update(acutionItem);
 
+    public bool Remove(Guid auctionItemId)
+    {
+        var @return = false;
+        var auctionItemToRemove = _context.AuctionItems
+            .Where(x => x.Id == auctionItemId)
+            .FirstOrDefault();
+
+        if (auctionItemToRemove is not null)
+        {
+            _context.AuctionItems.Remove(auctionItemToRemove);
+            @return = true;
+        }
+
+        return @return;
+    }
     public async Task<IEnumerable<AuctionItem>> RecoverAllAsync(int page, int pageSize) =>
         await _context.AuctionItems
         .Skip(page)
