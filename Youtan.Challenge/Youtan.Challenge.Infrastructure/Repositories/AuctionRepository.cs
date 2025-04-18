@@ -36,4 +36,8 @@ public class AuctionRepository(YoutanContext context) : IAuctionWriteOnly, IAuct
         .Skip(skip)
         .Take(pageSize)
         .ToListAsync();
+
+    public async Task<Auction?> RecoverByIdAsync(Guid auctionId) =>
+        await _context.Auctions
+        .FirstOrDefaultAsync(x => x.Id == auctionId);
 }

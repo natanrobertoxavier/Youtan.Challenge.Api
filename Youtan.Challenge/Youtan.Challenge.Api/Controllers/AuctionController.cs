@@ -3,8 +3,10 @@ using Youtan.Challenge.Api.Filters;
 using Youtan.Challenge.Application.UseCases.Auction.Delete;
 using Youtan.Challenge.Application.UseCases.Auction.Recover.RecoverAll;
 using Youtan.Challenge.Application.UseCases.Auction.Register;
+using Youtan.Challenge.Application.UseCases.Auction.Update;
 using Youtan.Challenge.Application.UseCases.Client.Delete;
 using Youtan.Challenge.Application.UseCases.Client.Recover.RecoverAll;
+using Youtan.Challenge.Application.UseCases.Client.Update;
 using Youtan.Challenge.Communication.Reponse;
 using Youtan.Challenge.Communication.Request;
 
@@ -36,6 +38,21 @@ public class AuctionController : YoutanController
         [FromQuery] int pageSize = 5)
     {
         var result = await useCase.RecoverAllAsync(page, pageSize);
+
+        return Response(result);
+    }
+
+
+    [HttpPut]
+    [ServiceFilter(typeof(AuthenticatedUserAttribute))]
+    [ProducesResponseType(typeof(Result<ResponseClient>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(Result<ResponseClient>), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(Result<ResponseClient>), StatusCodes.Status422UnprocessableEntity)]
+    public async Task<IActionResult> UpdateAuctionAsync(
+        [FromServices] IUpdateAuctionUseCase useCase,
+        [FromBody] RequestUpdateAuction request)
+    {
+        var result = await useCase.UpdateAuctionAsync(request);
 
         return Response(result);
     }

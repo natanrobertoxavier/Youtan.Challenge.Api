@@ -26,7 +26,7 @@ public class AuthenticatedUserAttribute(
 
             var user = await _userReadOnlyrepository.RecoverByEmailAsync(userEmail);
 
-            if (user?.Id == Guid.Empty)
+            if (user is null)
             {
                 throw new ValidationException("Usuário não localizado para o token informado");
             }

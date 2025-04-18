@@ -9,27 +9,18 @@ using Youtan.Challenge.Exceptions.ExceptionBase;
 
 namespace Youtan.Challenge.Application.UseCases.Client.Update;
 
-public class UpdateClienteUseCase : IUpdateClienteUseCase
+public class UpdateClienteUseCase(
+    IClientReadOnly clientReadOnlyRepository,
+    IClientWriteOnly clientWriteOnlyRepository,
+    IWorkUnit workUnit,
+    PasswordEncryptor passwordEncryptor,
+    ILogger logger) : IUpdateClienteUseCase
 {
-    private readonly IClientReadOnly _clientReadOnlyRepository;
-    private readonly IClientWriteOnly _clientWriteOnlyRepository;
-    private readonly IWorkUnit _workUnit;
-    private readonly PasswordEncryptor _passwordEncryptor;
-    private readonly ILogger _logger;
-
-    public UpdateClienteUseCase(
-        IClientReadOnly clientReadOnlyRepository,
-        IClientWriteOnly clientWriteOnlyRepository,
-        IWorkUnit workUnit,
-        PasswordEncryptor passwordEncryptor,
-        ILogger logger)
-    {
-        _clientReadOnlyRepository = clientReadOnlyRepository;
-        _clientWriteOnlyRepository = clientWriteOnlyRepository;
-        _workUnit = workUnit;
-        _passwordEncryptor = passwordEncryptor;
-        _logger = logger;
-    }
+    private readonly IClientReadOnly _clientReadOnlyRepository = clientReadOnlyRepository;
+    private readonly IClientWriteOnly _clientWriteOnlyRepository = clientWriteOnlyRepository;
+    private readonly IWorkUnit _workUnit = workUnit;
+    private readonly PasswordEncryptor _passwordEncryptor = passwordEncryptor;
+    private readonly ILogger _logger = logger;
 
     public async Task<Result<MessageResult>> UpdateClientAsync(RequestUpdateClient request)
     {
