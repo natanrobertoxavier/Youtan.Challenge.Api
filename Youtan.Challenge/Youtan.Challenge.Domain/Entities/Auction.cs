@@ -42,4 +42,5 @@ public class Auction : BaseEntity
     public string AuctionName { get; set; }
     public string AuctionDescription { get; set; }
     public string AuctionAddress { get; set; }
+    public virtual ICollection<AuctionItem> AuctionItems { get; set; }
 }

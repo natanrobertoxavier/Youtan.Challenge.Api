@@ -2,8 +2,6 @@
 using Youtan.Challenge.Communication.Reponse;
 using Youtan.Challenge.Domain.Repositories.Contracts;
 using Youtan.Challenge.Domain.Repositories.Contracts.Auction;
-using Youtan.Challenge.Domain.Repositories.Contracts.Client;
-using Youtan.Challenge.Exceptions.ExceptionBase;
 
 namespace Youtan.Challenge.Application.UseCases.Auction.Delete;
 

@@ -14,11 +14,11 @@ public class AuctionRepository(YoutanContext context) : IAuctionWriteOnly, IAuct
     public void Update(Auction auction) =>
         _context.Auctions.Update(auction);
 
-    public bool Remove(Guid clientId)
+    public bool Remove(Guid auctionId)
     {
         var @return = false;
         var auctionToRemove = _context.Auctions
-            .Where(x => x.Id == clientId)
+            .Where(x => x.Id == auctionId)
             .FirstOrDefault();
 
         if (auctionToRemove is not null)

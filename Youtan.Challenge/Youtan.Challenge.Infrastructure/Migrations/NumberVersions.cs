@@ -5,4 +5,6 @@ public enum NumberVersions
     CreateUsersTable = 1,
     CreateClientsTable = 2,
     CreateAuctionsTable = 3,
+    CreateAuctionItemsTable = 4,
+    AddStartingBidToAuctionItem = 5,
 }

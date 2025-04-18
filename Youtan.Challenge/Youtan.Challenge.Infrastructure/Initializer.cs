@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using Youtan.Challenge.Domain.Repositories.Contracts;
 using Youtan.Challenge.Domain.Repositories.Contracts.Auction;
+using Youtan.Challenge.Domain.Repositories.Contracts.AuctionItem;
 using Youtan.Challenge.Domain.Repositories.Contracts.Client;
 using Youtan.Challenge.Domain.Repositories.Contracts.User;
 using Youtan.Challenge.Infrastructure.Extensions;
@@ -64,6 +65,8 @@ public static class Initializer
             .AddScoped<IClientWriteOnly, ClientRepository>()
             .AddScoped<IClientReadOnly, ClientRepository>()
             .AddScoped<IAuctionWriteOnly, AuctionRepository>()
-            .AddScoped<IAuctionReadOnly, AuctionRepository>();
+            .AddScoped<IAuctionReadOnly, AuctionRepository>()
+            .AddScoped<IAuctionItemWriteOnly, AuctionItemRepository>()
+            .AddScoped<IAuctionItemReadOnly, AuctionItemRepository>();
     }
 }

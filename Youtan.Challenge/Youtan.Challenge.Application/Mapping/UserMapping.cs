@@ -14,16 +14,6 @@ public static class UserMapping
         );
     }
 
-    //public static ResponseUser ToResponse(this Domain.Entities.User doctor)
-    //{
-    //    return new ResponseUser(
-    //        doctor.Id,
-    //        doctor.RegistrationDate,
-    //        doctor.Name,
-    //        doctor.Email
-    //    );
-    //}
-
     public static ResponseLogin ToResponseLogin(this Domain.Entities.User user, string token)
     {
         return new ResponseLogin(
