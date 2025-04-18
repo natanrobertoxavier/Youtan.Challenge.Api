@@ -5,6 +5,7 @@ using TokenService.Manager.Controller;
 using Youtan.Challenge.Application.Services;
 using Youtan.Challenge.Application.UseCases.Client.Delete;
 using Youtan.Challenge.Application.UseCases.Client.Login;
+using Youtan.Challenge.Application.UseCases.Client.Recover.RecoverAll;
 using Youtan.Challenge.Application.UseCases.Client.Register;
 using Youtan.Challenge.Application.UseCases.User.Login;
 using Youtan.Challenge.Application.UseCases.User.Register;
@@ -35,7 +36,8 @@ public static class Initializer
             .AddScoped<IUserLoginUseCase, UserLoginUseCase>()
             .AddScoped<IRegisterClientUseCase, RegisterClientUseCase>()
             .AddScoped<IClientLoginUseCase, ClientLoginUseCase>()
-            .AddScoped<IDeleteClientUseCase, DeleteClientUseCase>();
+            .AddScoped<IDeleteClientUseCase, DeleteClientUseCase>()
+            .AddScoped<IRecoverAllClientUseCase, RecoverAllClientUseCase>();
     }
 
     private static void AddAdditionalKeyPassword(IServiceCollection services, IConfiguration configuration)

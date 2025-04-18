@@ -41,4 +41,11 @@ public class ClientRepository(YoutanContext context) : IClientWriteOnly, IClient
         .FirstOrDefaultAsync(
             d => d.Email.Equals(email) &&
             d.Password.Equals(password));
+
+    public async Task<IEnumerable<Client>> RecoverAllAsync(int skip, int pageSize) =>
+        await _context.Clients
+        .AsNoTracking()
+        .Skip(skip)
+        .Take(pageSize)
+        .ToListAsync();
 }
