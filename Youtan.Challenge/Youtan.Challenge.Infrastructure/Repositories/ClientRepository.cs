@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Youtan.Challenge.Domain.Entities;
-using Youtan.Challenge.Domain.Repositories.Contracts;
 using Youtan.Challenge.Domain.Repositories.Contracts.Client;
 
 namespace Youtan.Challenge.Infrastructure.Repositories;
@@ -14,6 +13,22 @@ public class ClientRepository(YoutanContext context) : IClientWriteOnly, IClient
 
     public void Update(Client client) =>
         _context.Clients.Update(client);
+
+    public bool Remove(Guid clientId)
+    {
+        var @return = false;
+        var clientToRemove = _context.Clients
+            .Where(x => x.Id == clientId)
+            .FirstOrDefault();
+
+        if (clientToRemove is not null) 
+        {
+            _context.Clients.Remove(clientToRemove);
+            @return = true;
+        }
+
+        return @return;
+    }
 
     public async Task<Client> RecoverByEmailAsync(string email) =>
         await _context.Clients

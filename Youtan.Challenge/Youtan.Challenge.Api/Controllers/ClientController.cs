@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using Youtan.Challenge.Api.Filters;
+using Youtan.Challenge.Application.UseCases.Client.Delete;
 using Youtan.Challenge.Application.UseCases.Client.Login;
 using Youtan.Challenge.Application.UseCases.Client.Register;
-using Youtan.Challenge.Application.UseCases.User.Login;
 using Youtan.Challenge.Communication.Reponse;
 using Youtan.Challenge.Communication.Request;
 
@@ -20,6 +21,19 @@ public class ClientController : YoutanController
         var result = await useCase.RegisterClientAsync(request);
 
         return ResponseCreate(result);
+    }
+
+    [HttpDelete("{clientId}")]
+    [ServiceFilter(typeof(AuthenticatedUserAttribute))]
+    [ProducesResponseType(typeof(Result<MessageResult>), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(Result<MessageResult>), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> DeleteClientAsync(
+        [FromServices] IDeleteClientUseCase useCase,
+        [FromRoute] Guid clientId)
+    {
+        var result = await useCase.DeleteClientAsync(clientId);
+
+        return Response(result);
     }
 
     [HttpPost("login")]
