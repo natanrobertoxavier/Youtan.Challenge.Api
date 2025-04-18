@@ -5,6 +5,7 @@ using Youtan.Challenge.Application.UseCases.Client.Delete;
 using Youtan.Challenge.Application.UseCases.Client.Login;
 using Youtan.Challenge.Application.UseCases.Client.Recover.RecoverAll;
 using Youtan.Challenge.Application.UseCases.Client.Register;
+using Youtan.Challenge.Application.UseCases.Client.Update;
 using Youtan.Challenge.Communication.Reponse;
 using Youtan.Challenge.Communication.Request;
 
@@ -35,6 +36,20 @@ public class ClientController : YoutanController
         [FromQuery] int pageSize = 5)
     {
         var result = await useCase.RecoverAllAsync(page, pageSize);
+
+        return Response(result);
+    }
+
+    [HttpPut]
+    [ServiceFilter(typeof(AuthenticatedUserAttribute))]
+    [ProducesResponseType(typeof(Result<ResponseClient>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(Result<ResponseClient>), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(Result<ResponseClient>), StatusCodes.Status422UnprocessableEntity)]
+    public async Task<IActionResult> UpdateClientAsync(
+        [FromServices] IUpdateClienteUseCase useCase,
+        [FromBody] RequestUpdateClient request)
+    {
+        var result = await useCase.UpdateClientAsync(request);
 
         return Response(result);
     }

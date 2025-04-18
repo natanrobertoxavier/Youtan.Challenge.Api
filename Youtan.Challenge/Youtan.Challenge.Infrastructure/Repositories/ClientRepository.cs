@@ -30,6 +30,10 @@ public class ClientRepository(YoutanContext context) : IClientWriteOnly, IClient
         return @return;
     }
 
+    public async Task<Client> RecoverByIdAsync(Guid id) =>
+        await _context.Clients
+        .FirstOrDefaultAsync(d => d.Id.Equals(id));
+
     public async Task<Client> RecoverByEmailAsync(string email) =>
         await _context.Clients
         .AsNoTracking()
