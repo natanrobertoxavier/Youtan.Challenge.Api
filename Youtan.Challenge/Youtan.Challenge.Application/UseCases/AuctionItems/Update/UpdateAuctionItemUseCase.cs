@@ -61,6 +61,7 @@ public class UpdateAuctionItemUseCase(
         auctionItem.ItemType = (Domain.Enum.ItemType) request.ItemType;
         auctionItem.Description = request.Description.ToUpper();
         auctionItem.StartingBid = request.StartingBid;
+        auctionItem.Increase = request.Increase;
 
         return auctionItem;
     }
