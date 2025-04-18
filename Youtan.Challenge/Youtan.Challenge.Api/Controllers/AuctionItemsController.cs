@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Youtan.Challenge.Api.Filters;
-using Youtan.Challenge.Application.UseCases.Auction.Delete;
 using Youtan.Challenge.Application.UseCases.AuctionItems.Delete;
 using Youtan.Challenge.Application.UseCases.AuctionItems.Recover.RecoverAll;
 using Youtan.Challenge.Application.UseCases.AuctionItems.Register;
@@ -42,9 +41,9 @@ public class AuctionItemsController : YoutanController
 
     [HttpPut]
     [ServiceFilter(typeof(AuthenticatedUserAttribute))]
-    [ProducesResponseType(typeof(Result<ResponseClient>), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(Result<ResponseClient>), StatusCodes.Status404NotFound)]
-    [ProducesResponseType(typeof(Result<ResponseClient>), StatusCodes.Status422UnprocessableEntity)]
+    [ProducesResponseType(typeof(Result<MessageResult>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(Result<MessageResult>), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(Result<MessageResult>), StatusCodes.Status422UnprocessableEntity)]
     public async Task<IActionResult> UpdateAuctionItemsAsync(
         [FromServices] IUpdateAuctionItemUseCase useCase,
         [FromBody] RequestUpdateAuctionItem request)

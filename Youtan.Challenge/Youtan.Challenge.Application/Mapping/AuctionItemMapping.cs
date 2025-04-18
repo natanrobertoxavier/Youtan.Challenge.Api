@@ -14,7 +14,8 @@ public static class AuctionItemMapping
             request.Description.ToUpper(),
             userId,
             request.AuctionId,
-            request.StartingBid
+            request.StartingBid,
+            request.Increase
         );
     }
 
@@ -25,6 +26,7 @@ public static class AuctionItemMapping
             entity.ItemType.GetDescription(),
             entity.Description,
             entity.StartingBid,
+            entity.Increase,
             entity.Auction.ToResponse()
         );
     }

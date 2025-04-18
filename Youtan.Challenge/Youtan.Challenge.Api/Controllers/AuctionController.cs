@@ -41,9 +41,9 @@ public class AuctionController : YoutanController
 
     [HttpPut]
     [ServiceFilter(typeof(AuthenticatedUserAttribute))]
-    [ProducesResponseType(typeof(Result<ResponseClient>), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(Result<ResponseClient>), StatusCodes.Status404NotFound)]
-    [ProducesResponseType(typeof(Result<ResponseClient>), StatusCodes.Status422UnprocessableEntity)]
+    [ProducesResponseType(typeof(Result<MessageResult>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(Result<MessageResult>), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(Result<MessageResult>), StatusCodes.Status422UnprocessableEntity)]
     public async Task<IActionResult> UpdateAuctionAsync(
         [FromServices] IUpdateAuctionUseCase useCase,
         [FromBody] RequestUpdateAuction request)
@@ -56,7 +56,7 @@ public class AuctionController : YoutanController
     [HttpDelete("{auctionId}")]
     [ServiceFilter(typeof(AuthenticatedUserAttribute))]
     [ProducesResponseType(typeof(Result<MessageResult>), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(Result<ResponseClient>), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(Result<MessageResult>), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeleteAuctionAsync(
         [FromServices] IDeleteAuctionUseCase useCase,
         [FromRoute] Guid auctionId)
