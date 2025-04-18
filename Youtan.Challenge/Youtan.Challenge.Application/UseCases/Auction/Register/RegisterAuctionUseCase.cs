@@ -8,7 +8,7 @@ using Youtan.Challenge.Domain.Repositories.Contracts;
 using Youtan.Challenge.Domain.Repositories.Contracts.Auction;
 using Youtan.Challenge.Exceptions.ExceptionBase;
 
-namespace Youtan.Challenge.Application.UseCases.Auction;
+namespace Youtan.Challenge.Application.UseCases.Auction.Register;
 
 public class RegisterAuctionUseCase(
     IAuctionWriteOnly auctionWriteOnlyRepository,

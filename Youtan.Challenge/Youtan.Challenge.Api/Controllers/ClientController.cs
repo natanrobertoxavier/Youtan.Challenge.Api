@@ -27,9 +27,9 @@ public class ClientController : YoutanController
 
     [HttpGet]
     [ServiceFilter(typeof(AuthenticatedUserAttribute))]
-    [ProducesResponseType(typeof(Result<ResponseClient>), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(Result<ResponseClient>), StatusCodes.Status404NotFound)]
-    [ProducesResponseType(typeof(Result<ResponseClient>), StatusCodes.Status422UnprocessableEntity)]
+    [ProducesResponseType(typeof(Result<IEnumerable<ResponseClient>>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(Result<IEnumerable<ResponseClient>>), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(Result<IEnumerable<ResponseClient>>), StatusCodes.Status422UnprocessableEntity)]
     public async Task<IActionResult> RecoverAllAsync(
         [FromServices] IRecoverAllClientUseCase useCase,
         [FromQuery] int page = 1,

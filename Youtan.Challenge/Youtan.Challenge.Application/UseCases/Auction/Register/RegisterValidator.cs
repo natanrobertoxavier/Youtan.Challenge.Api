@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using Youtan.Challenge.Communication.Request;
 
-namespace Youtan.Challenge.Application.UseCases.Auction;
+namespace Youtan.Challenge.Application.UseCases.Auction.Register;
 
 public class RegisterValidator : AbstractValidator<RequestRegisterAuction>
 {

@@ -1,4 +1,5 @@
-﻿using Youtan.Challenge.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Youtan.Challenge.Domain.Entities;
 using Youtan.Challenge.Domain.Repositories.Contracts.Auction;
 
 namespace Youtan.Challenge.Infrastructure.Repositories;
@@ -12,4 +13,11 @@ public class AuctionRepository(YoutanContext context) : IAuctionWriteOnly, IAuct
 
     public void Update(Auction auction) =>
         _context.Auctions.Update(auction);
+
+    public async Task<IEnumerable<Auction>> RecoverAllAsync(int skip, int pageSize) =>
+        await _context.Auctions
+        .AsNoTracking()
+        .Skip(skip)
+        .Take(pageSize)
+        .ToListAsync();
 }

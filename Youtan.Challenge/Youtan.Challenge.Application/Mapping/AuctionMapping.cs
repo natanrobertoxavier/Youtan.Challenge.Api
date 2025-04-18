@@ -14,4 +14,14 @@ public static class AuctionMapping
             request.AuctionAddress
         );
     }
+    public static Communication.Reponse.ResponseAuction ToResponse(this Domain.Entities.Auction entity)
+    {
+        return new Communication.Reponse.ResponseAuction(
+            entity.Id,
+            entity.AuctionDate,
+            entity.AuctionName,
+            entity.AuctionDescription,
+            entity.AuctionAddress
+        );
+    }
 }
