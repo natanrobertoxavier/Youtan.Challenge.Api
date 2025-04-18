@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using TokenService.Manager.Controller;
 using Youtan.Challenge.Application.Services;
+using Youtan.Challenge.Application.UseCases.Auction.Delete;
 using Youtan.Challenge.Application.UseCases.Auction.Recover.RecoverAll;
 using Youtan.Challenge.Application.UseCases.Auction.Register;
 using Youtan.Challenge.Application.UseCases.Client.Delete;
@@ -43,7 +44,8 @@ public static class Initializer
             .AddScoped<IRecoverAllClientUseCase, RecoverAllClientUseCase>()
             .AddScoped<IUpdateClienteUseCase, UpdateClienteUseCase>()
             .AddScoped<IRegisterAuctionUseCase, RegisterAuctionUseCase>()
-            .AddScoped<IRecoverAllAuctionsUseCase, RecoverAllAuctionsUseCase>();
+            .AddScoped<IRecoverAllAuctionsUseCase, RecoverAllAuctionsUseCase>()
+            .AddScoped<IDeleteAuctionUseCase, DeleteAuctionUseCase>();
     }
 
     private static void AddAdditionalKeyPassword(IServiceCollection services, IConfiguration configuration)

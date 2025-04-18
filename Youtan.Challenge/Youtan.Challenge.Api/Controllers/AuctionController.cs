@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Youtan.Challenge.Api.Filters;
+using Youtan.Challenge.Application.UseCases.Auction.Delete;
 using Youtan.Challenge.Application.UseCases.Auction.Recover.RecoverAll;
 using Youtan.Challenge.Application.UseCases.Auction.Register;
+using Youtan.Challenge.Application.UseCases.Client.Delete;
 using Youtan.Challenge.Application.UseCases.Client.Recover.RecoverAll;
 using Youtan.Challenge.Communication.Reponse;
 using Youtan.Challenge.Communication.Request;
@@ -36,5 +38,18 @@ public class AuctionController : YoutanController
         var result = await useCase.RecoverAllAsync(page, pageSize);
 
         return Response(result);
+    }
+
+    [HttpDelete("{auctionId}")]
+    [ServiceFilter(typeof(AuthenticatedUserAttribute))]
+    [ProducesResponseType(typeof(Result<MessageResult>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(Result<ResponseClient>), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> DeleteAuctionAsync(
+        [FromServices] IDeleteAuctionUseCase useCase,
+        [FromRoute] Guid auctionId)
+    {
+        var result = await useCase.DeleteAuctionAsync(auctionId);
+
+        return Response(result, failStatusCode: System.Net.HttpStatusCode.NotFound);
     }
 }

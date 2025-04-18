@@ -56,15 +56,15 @@ public class ClientController : YoutanController
 
     [HttpDelete("{clientId}")]
     [ServiceFilter(typeof(AuthenticatedUserAttribute))]
-    [ProducesResponseType(typeof(Result<MessageResult>), StatusCodes.Status201Created)]
-    [ProducesResponseType(typeof(Result<MessageResult>), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(Result<MessageResult>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(Result<ResponseClient>), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeleteClientAsync(
         [FromServices] IDeleteClientUseCase useCase,
         [FromRoute] Guid clientId)
     {
         var result = await useCase.DeleteClientAsync(clientId);
 
-        return Response(result);
+        return Response(result, failStatusCode: System.Net.HttpStatusCode.NotFound);
     }
 
     [HttpPost("login")]
