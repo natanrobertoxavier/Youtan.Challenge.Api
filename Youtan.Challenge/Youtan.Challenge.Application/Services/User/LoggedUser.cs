@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using TokenService.Manager.Controller;
 using Youtan.Challenge.Domain.Repositories.Contracts.User;
+using Youtan.Challenge.Exceptions.ExceptionBase;
 
-namespace Youtan.Challenge.Application.Services;
+namespace Youtan.Challenge.Application.Services.User;
 
 public class LoggedUser(
     IHttpContextAccessor httpContextAccessor,
@@ -13,7 +14,7 @@ public class LoggedUser(
     private readonly TokenController _tokenController = tokenController;
     private readonly IUserReadOnly _repository = repository;
 
-    public async Task<Domain.Entities.User> GetLoggedUserAsync()
+    public async Task<Domain.Entities.User?> GetLoggedUserAsync()
     {
         var authorization = _httpContextAccessor.HttpContext.Request.Headers["Authorization"].ToString();
 
@@ -21,6 +22,7 @@ public class LoggedUser(
 
         var email = _tokenController.RecoverEmail(token);
 
-        return await _repository.RecoverByEmailAsync(email);
+        return await _repository.RecoverByEmailAsync(email) ??
+            throw new YoutanException("Usuário logado não localizado");
     }
 }

@@ -2,7 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using TokenService.Manager.Controller;
-using Youtan.Challenge.Application.Services;
+using Youtan.Challenge.Application.Services.Client;
+using Youtan.Challenge.Application.Services.User;
 using Youtan.Challenge.Application.UseCases.Auction.Delete;
 using Youtan.Challenge.Application.UseCases.Auction.Recover.RecoverAll;
 using Youtan.Challenge.Application.UseCases.Auction.Register;
@@ -11,6 +12,7 @@ using Youtan.Challenge.Application.UseCases.AuctionItems.Delete;
 using Youtan.Challenge.Application.UseCases.AuctionItems.Recover.RecoverAll;
 using Youtan.Challenge.Application.UseCases.AuctionItems.Register;
 using Youtan.Challenge.Application.UseCases.AuctionItems.Update;
+using Youtan.Challenge.Application.UseCases.Bid.Register;
 using Youtan.Challenge.Application.UseCases.Client.Delete;
 using Youtan.Challenge.Application.UseCases.Client.Login;
 using Youtan.Challenge.Application.UseCases.Client.Recover.RecoverAll;
@@ -35,7 +37,8 @@ public static class Initializer
     private static void AddLoggedUsers(IServiceCollection services)
     {
         services
-            .AddScoped<ILoggedUser, LoggedUser>();
+            .AddScoped<ILoggedUser, LoggedUser>()
+            .AddScoped<ILoggedClient, LoggedClient>();
     }
 
     private static void AddUseCases(IServiceCollection services)
@@ -55,7 +58,8 @@ public static class Initializer
             .AddScoped<IRegisterAuctionItemsUseCase, RegisterAuctionItemsUseCase>()
             .AddScoped<IRecoverAllAuctionItemUseCase, RecoverAllAuctionItemUseCase>()
             .AddScoped<IUpdateAuctionItemUseCase, UpdateAuctionItemUseCase>()
-            .AddScoped<IDeleteAuctionItemUseCase, DeleteAuctionItemUseCase>();
+            .AddScoped<IDeleteAuctionItemUseCase, DeleteAuctionItemUseCase>()
+            .AddScoped<IRegisterBidUseCase, RegisterBidUseCase>();
     }
 
     private static void AddAdditionalKeyPassword(IServiceCollection services, IConfiguration configuration)

@@ -37,6 +37,7 @@ public class Auction : BaseEntity
     public Auction()
     {
     }
+
     public Guid UserId { get; set; }
     public DateTime AuctionDate { get; set; }
     public string AuctionName { get; set; }

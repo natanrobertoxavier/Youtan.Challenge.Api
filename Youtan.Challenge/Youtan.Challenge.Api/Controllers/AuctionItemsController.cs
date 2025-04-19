@@ -19,7 +19,7 @@ public class AuctionItemsController : YoutanController
         [FromServices] IRegisterAuctionItemsUseCase useCase,
         [FromBody] RequestRegisterAuctionItem request)
     {
-        var result = await useCase.RegisterAuctionItemsAsync(request);
+        var result = await useCase.RegisterBidAsync(request);
 
         return ResponseCreate(result);
     }

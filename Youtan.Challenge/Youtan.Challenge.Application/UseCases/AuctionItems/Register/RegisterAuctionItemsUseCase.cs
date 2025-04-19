@@ -1,5 +1,4 @@
 ﻿using Serilog;
-using Youtan.Challenge.Application.Services;
 using Youtan.Challenge.Communication.Reponse;
 using Youtan.Challenge.Communication.Request;
 using Youtan.Challenge.Domain.Repositories.Contracts.Auction;
@@ -7,6 +6,7 @@ using Youtan.Challenge.Domain.Repositories.Contracts;
 using Youtan.Challenge.Exceptions.ExceptionBase;
 using Youtan.Challenge.Domain.Repositories.Contracts.AuctionItem;
 using Youtan.Challenge.Application.Mapping;
+using Youtan.Challenge.Application.Services.User;
 
 namespace Youtan.Challenge.Application.UseCases.AuctionItems.Register;
 
@@ -23,13 +23,13 @@ public class RegisterAuctionItemsUseCase(
     private readonly IWorkUnit _workUnit = workUnit;
     private readonly ILogger _logger = logger;
 
-    public async Task<Result<MessageResult>> RegisterAuctionItemsAsync(RequestRegisterAuctionItem request)
+    public async Task<Result<MessageResult>> RegisterBidAsync(RequestRegisterAuctionItem request)
     {
         var output = new Result<MessageResult>();
 
         try
         {
-            _logger.Information($"Início {nameof(RegisterAuctionItemsAsync)}.");
+            _logger.Information($"Início {nameof(RegisterBidAsync)}.");
 
             await Validate(request);
 
@@ -43,7 +43,7 @@ public class RegisterAuctionItemsUseCase(
 
             output.Succeeded(new MessageResult("Cadastro realizado com sucesso"));
 
-            _logger.Information($"Fim {nameof(RegisterAuctionItemsAsync)}.");
+            _logger.Information($"Fim {nameof(RegisterBidAsync)}.");
         }
         catch (ValidationErrorsException ex)
         {

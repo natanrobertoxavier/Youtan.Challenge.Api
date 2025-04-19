@@ -8,4 +8,5 @@ public enum NumberVersions
     CreateAuctionItemsTable = 4,
     AddStartingBidToAuctionItem = 5,
     AddIncreasedToAuctionItem = 6,
+    CreateBidsTable = 7,
 }

@@ -1,7 +1,7 @@
 ﻿using Serilog;
 using TokenService.Manager.Controller;
 using Youtan.Challenge.Application.Mapping;
-using Youtan.Challenge.Application.Services;
+using Youtan.Challenge.Application.Services.User;
 using Youtan.Challenge.Communication.Reponse;
 using Youtan.Challenge.Communication.Request;
 using Youtan.Challenge.Domain.Repositories.Contracts;

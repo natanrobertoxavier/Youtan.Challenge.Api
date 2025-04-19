@@ -47,6 +47,7 @@ builder.Services.AddApplication(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddScoped<AuthenticatedAttribute>();
 builder.Services.AddScoped<AuthenticatedUserAttribute>();
+builder.Services.AddScoped<AuthenticatedClientAttribute>();
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilters)));
 
 var app = builder.Build();
