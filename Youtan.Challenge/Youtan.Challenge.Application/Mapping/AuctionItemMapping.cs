@@ -27,7 +27,18 @@ public static class AuctionItemMapping
             entity.Description,
             entity.StartingBid,
             entity.Increase,
-            entity.Auction.ToResponse()
+            entity.Auction.ToResponseAuctionItem()
+        );
+    }
+
+    public static ResponseAuctionItem ToResponseAuction(this AuctionItem entity)
+    {
+        return new ResponseAuctionItem(
+            entity.Id,
+            entity.ItemType.GetDescription(),
+            entity.Description,
+            entity.StartingBid,
+            entity.Increase
         );
     }
 }
