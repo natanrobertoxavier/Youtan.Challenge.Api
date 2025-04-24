@@ -12,27 +12,27 @@ public class RecoverAllAuctionUseCase(
     private readonly IAuctionReadOnly _auctionReadOnlyRepository = auctionReadOnlyRepository;
     private readonly ILogger _logger = logger;
 
-    public async Task<Result<IEnumerable<ResponseAuction>>> RecoverAuctionByIdAsync(int page, int pageSize)
+    public async Task<Result<IEnumerable<ResponseAuction>>> RecoverAllAsync(int page, int pageSize)
     {
         var output = new Result<IEnumerable<ResponseAuction>>();
 
         try
         {
-            _logger.Information($"Início {nameof(RecoverAuctionByIdAsync)}.");
+            _logger.Information($"Início {nameof(RecoverAllAsync)}.");
 
             var entities = await _auctionReadOnlyRepository.RecoverAllAsync(Skip(page, pageSize), pageSize);
 
             if (!entities.Any())
             {
                 output.Succeeded(null);
-                _logger.Information($"{nameof(RecoverAuctionByIdAsync)} - Não foram encontrados dados.");
+                _logger.Information($"{nameof(RecoverAllAsync)} - Não foram encontrados dados.");
             }
             else
             {
                 output.Succeeded(entities.Select(entity => entity.ToResponse()));
             }
 
-            _logger.Information($"Fim {nameof(RecoverAuctionByIdAsync)}.");
+            _logger.Information($"Fim {nameof(RecoverAllAsync)}.");
         }
         catch (Exception ex)
         {
