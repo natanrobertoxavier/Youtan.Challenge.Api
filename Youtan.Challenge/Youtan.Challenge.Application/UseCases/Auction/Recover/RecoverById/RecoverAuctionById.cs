@@ -3,33 +3,33 @@ using Youtan.Challenge.Application.Mapping;
 using Youtan.Challenge.Communication.Reponse;
 using Youtan.Challenge.Domain.Repositories.Contracts.Auction;
 
-namespace Youtan.Challenge.Application.UseCases.Auction.Recover.RecoverAll;
+namespace Youtan.Challenge.Application.UseCases.Auction.Recover.RecoverById;
 
-public class RecoverAllAuctionUseCase(
+public class RecoverAuctionById(
     IAuctionReadOnly auctionReadOnlyRepository,
-    ILogger logger) : IRecoverAllAuctionUseCase
+    ILogger logger) : IRecoverAuctionById
 {
     private readonly IAuctionReadOnly _auctionReadOnlyRepository = auctionReadOnlyRepository;
     private readonly ILogger _logger = logger;
 
-    public async Task<Result<IEnumerable<ResponseAuction>>> RecoverAuctionByIdAsync(int page, int pageSize)
+    public async Task<Result<ResponseAuction>> RecoverAuctionByIdAsync(Guid auctionId)
     {
-        var output = new Result<IEnumerable<ResponseAuction>>();
+        var output = new Result<ResponseAuction>();
 
         try
         {
             _logger.Information($"Início {nameof(RecoverAuctionByIdAsync)}.");
 
-            var entities = await _auctionReadOnlyRepository.RecoverAllAsync(Skip(page, pageSize), pageSize);
+            var entity = await _auctionReadOnlyRepository.RecoverByIdAsync(auctionId);
 
-            if (!entities.Any())
+            if (entity is null)
             {
                 output.Succeeded(null);
                 _logger.Information($"{nameof(RecoverAuctionByIdAsync)} - Não foram encontrados dados.");
             }
             else
             {
-                output.Succeeded(entities.Select(entity => entity.ToResponse()));
+                output.Succeeded(entity.ToResponse());
             }
 
             _logger.Information($"Fim {nameof(RecoverAuctionByIdAsync)}.");
@@ -45,7 +45,4 @@ public class RecoverAllAuctionUseCase(
 
         return output;
     }
-
-    private static int Skip(int page, int pageSize) =>
-        (page - 1) * pageSize;
 }

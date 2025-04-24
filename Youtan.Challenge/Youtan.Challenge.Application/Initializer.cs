@@ -5,6 +5,7 @@ using TokenService.Manager.Controller;
 using Youtan.Challenge.Application.Services;
 using Youtan.Challenge.Application.UseCases.Auction.Delete;
 using Youtan.Challenge.Application.UseCases.Auction.Recover.RecoverAll;
+using Youtan.Challenge.Application.UseCases.Auction.Recover.RecoverById;
 using Youtan.Challenge.Application.UseCases.Auction.Register;
 using Youtan.Challenge.Application.UseCases.Auction.Update;
 using Youtan.Challenge.Application.UseCases.AuctionItems.Delete;
@@ -50,6 +51,7 @@ public static class Initializer
             .AddScoped<IUpdateClienteUseCase, UpdateClienteUseCase>()
             .AddScoped<IRegisterAuctionUseCase, RegisterAuctionUseCase>()
             .AddScoped<IRecoverAllAuctionUseCase, RecoverAllAuctionUseCase>()
+            .AddScoped<IRecoverAuctionById, RecoverAuctionById>()
             .AddScoped<IDeleteAuctionUseCase, DeleteAuctionUseCase>()
             .AddScoped<IUpdateAuctionUseCase, UpdateAuctionUseCase>()
             .AddScoped<IRegisterAuctionItemsUseCase, RegisterAuctionItemsUseCase>()

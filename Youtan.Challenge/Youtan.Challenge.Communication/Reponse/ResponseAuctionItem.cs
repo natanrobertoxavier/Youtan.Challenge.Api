@@ -1,20 +1,46 @@
-﻿using Youtan.Challenge.Communication.Enums;
+﻿using System.Text.Json.Serialization;
+using Youtan.Challenge.Communication.Enums;
 using Youtan.Challenge.Communication.Request;
 
 namespace Youtan.Challenge.Communication.Reponse;
 
-public class ResponseAuctionItem(
-    Guid auctionItemId,
-    string itemType,
-    string description,
-    decimal startingBid,
-    decimal increase,
-    ResponseAuction auction)
+public class ResponseAuctionItem
 {
-    public Guid AuctionItemId { get; set; } = auctionItemId;
-    public string ItemType { get; set; } = itemType;
-    public string Description { get; set; } = description;
-    public decimal StartingBid { get; set; } = startingBid;
-    public decimal Increase { get; set; } = increase;
-    public ResponseAuction Auction { get; set; } = auction;
+    public ResponseAuctionItem(
+        Guid auctionItemId, 
+        string itemType, 
+        string description, 
+        decimal startingBid, 
+        decimal increase, 
+        ResponseAuction auction)
+    {
+        AuctionItemId = auctionItemId;
+        ItemType = itemType;
+        Description = description;
+        StartingBid = startingBid;
+        Increase = increase;
+        Auction = auction;
+    }
+    public ResponseAuctionItem(
+        Guid auctionItemId, 
+        string itemType, 
+        string description, 
+        decimal startingBid, 
+        decimal increase)
+    {
+        AuctionItemId = auctionItemId;
+        ItemType = itemType;
+        Description = description;
+        StartingBid = startingBid;
+        Increase = increase;
+    }
+
+    public Guid AuctionItemId { get; set; }
+    public string ItemType { get; set; }
+    public string Description { get; set; }
+    public decimal StartingBid { get; set; }
+    public decimal Increase { get; set; }
+
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public ResponseAuction Auction { get; set; }
 }
