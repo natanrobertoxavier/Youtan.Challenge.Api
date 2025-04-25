@@ -19,7 +19,8 @@ public static class ExtensionRepository
     {
         var databaseName = configurationManager.GetDatabaseName();
         var connection = configurationManager.GetConnection();
-
+        Console.WriteLine("#################################################################################################################");
+        Console.WriteLine($"{connection}Database={databaseName};");
         return $"{connection}Database={databaseName};";
     }
 }
